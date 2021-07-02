@@ -9,7 +9,7 @@ There is a `ConfigEngine::Global` level which is considered a read-only config (
 
 Assuming that the global config always contains a full set of possible config values, each next level, when being loaded, just amends the global config overriding existing values. User and project configs can be loaded and unloaded in runtime without any problem via corresponding methods. Whenever a value of a specific config key is changed due to the amendment process or somehow externally, a signal is emitted and the corresponding property is notified triggering invalidation (and re-evaluation) of a binding.
 
-To access actual values, `ConfigEngine` also exposes a global context property `Config`.
+To access actual values, `ConfigEngine` also exposes a global context property `$Config`.
 
 Configs are stored in JSON format. Thus, for a config like:
 ```json
@@ -20,7 +20,7 @@ Configs are stored in JSON format. Thus, for a config like:
     }
 }
 ```
-it is possible to access the values in QML through `Config.colors.defaultBackground` and `Config.colors.defaultText`.
+it is possible to access the values in QML through `$Config.colors.defaultBackground` and `$Config.colors.defaultText`.
 
 ## Usage
 
