@@ -3,6 +3,7 @@
 #include <QtCore/QHash>
 #include <QtCore/QJsonObject>
 #include <QtCore/QObject>
+#include <QtCore/QUrl>
 
 class JsonQObject;
 class QQmlEngine;
@@ -30,7 +31,7 @@ public:
     void setQmlEngine(QQmlEngine *qmlEngine);
 
 public slots:
-    void loadConfig(const QString &path, ConfigLevel level = Global);
+    void loadConfig(const QUrl &url, ConfigLevel level = Global);
     void loadData(const QByteArray &data, ConfigLevel level = Global);
     void unloadConfig(ConfigLevel level);
     void clear();

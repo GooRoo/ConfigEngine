@@ -85,8 +85,9 @@ QObject *ConfigEngine::root() const
     return m_root.object;
 }
 
-void ConfigEngine::loadConfig(const QString &path, ConfigEngine::ConfigLevel level)
+void ConfigEngine::loadConfig(const QUrl &url, ConfigEngine::ConfigLevel level)
 {
+	auto path = url.toLocalFile();
     QFile f(path);
     if (!f.open(QIODevice::ReadOnly)) {
         qWarning() << "File" << path << "not found!";
