@@ -16,6 +16,7 @@ class ConfigEngine : public QObject
 public:
     enum ConfigLevel {
         Global = 0,
+		ThemeOverlay,
         User,
         Project,
         LevelsCount
