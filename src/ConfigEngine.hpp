@@ -4,6 +4,7 @@
 #include <QtCore/QJsonObject>
 #include <QtCore/QObject>
 #include <QtCore/QUrl>
+#include "private/node.h"
 
 class JsonQObject;
 class QQmlEngine;
@@ -46,40 +47,6 @@ private:
     friend class JsonQObject;
 
 	void resetContextProperty();
-
-    struct NamedValueGroup
-    {
-        NamedValueGroup(const QString &key, QVariant value);
-        QString key;
-        QVariant values[LevelsCount];
-        const QVariant &value() const;
-    };
-
-    struct Node
-    {
-        QString name;
-        Node *parent = nullptr;
-        QList<Node*> childNodes;
-        QList<NamedValueGroup> properties;
-
-        JsonQObject *object = nullptr;
-
-        const QVariant &valueAt(int index) const;
-
-        void createObject();
-        void setJsonObject(QJsonObject object);
-        void updateJsonObject(QJsonObject object, ConfigLevel level);
-        void updateProperty(int index, ConfigLevel level, QVariant value);
-        void clearProperty(int index, ConfigLevel level);
-
-        void clear();
-        void unload(ConfigLevel level);
-
-        int indexOfProperty(const QString &name) const;
-        int indexOfChild(const QString &name) const;
-
-        QString fullPropertyName(const QString &property) const;
-    };
 
     Node m_root;
     QVarLengthArray<QJsonObject, LevelsCount> m_data;
