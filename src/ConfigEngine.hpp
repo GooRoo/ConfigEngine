@@ -67,6 +67,7 @@ public slots:
     void unloadConfig(ConfigLevel level);
     void clear();
     void setProperty(const QString &key, QVariant value, ConfigLevel level = User);
+    QVariant getProperty(const QString &key, ConfigLevel level = Global);
 
 signals:
     void configChanged();
@@ -83,6 +84,7 @@ private:
     friend class Node;
 
 	void resetContextProperty();
+    Node *getNodeHelper(const QString &key, int &indexOfProperty);
 
     Node m_root;
     QQmlEngine *m_qmlEngine = nullptr;
