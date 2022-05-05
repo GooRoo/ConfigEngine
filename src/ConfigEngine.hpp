@@ -17,6 +17,7 @@ class ConfigEngine : public QObject
     Q_PROPERTY(QString errorString READ errorString NOTIFY errorStringChanged)
 
     Q_PROPERTY(bool globalConfigModified READ globalConfigModified NOTIFY globalConfigModifiedChanged)
+    Q_PROPERTY(bool themeOverlayConfigModified READ themeOverlayConfigModified NOTIFY themeOverlayConfigModifiedChanged)
     Q_PROPERTY(bool userConfigModified READ userConfigModified NOTIFY userConfigModifiedChanged)
     Q_PROPERTY(bool projectConfigModified READ projectConfigModified NOTIFY projectConfigModifiedChanged)
 
@@ -32,13 +33,15 @@ public:
     Q_ENUM(ConfigLevel)
 
     enum StateFlag {
-        Error                   = 0x01,
-        GlobalConfigLoaded      = 0x02,
-        UserConfigLoaded        = 0x04,
-        ProjectConfigLoaded     = 0x08,
-        GlobalConfigModified    = 0x10,
-        UserConfigModified      = 0x20,
-        ProjectConfigModified   = 0x40
+        Error                      = 0x001,
+        GlobalConfigLoaded         = 0x002,
+        ThemeOverlayConfigLoaded   = 0x004,
+        UserConfigLoaded           = 0x008,
+        ProjectConfigLoaded        = 0x010,
+        GlobalConfigModified       = 0x020,
+        ThemeOverlayConfigModified = 0x040,
+        UserConfigModified         = 0x080,
+        ProjectConfigModified      = 0x100
     };
     Q_DECLARE_FLAGS(StateFlags, StateFlag);
     Q_FLAG(StateFlags);
@@ -52,6 +55,7 @@ public:
     void setQmlEngine(QQmlEngine *qmlEngine);
 
     bool globalConfigModified() const;
+    bool themeOverlayConfigModified() const;
     bool userConfigModified() const;
     bool projectConfigModified() const;
 
@@ -72,6 +76,7 @@ public slots:
 signals:
     void configChanged();
     void globalConfigModifiedChanged();
+    void themeOverlayConfigModifiedChanged();
     void userConfigModifiedChanged();
     void projectConfigModifiedChanged();
     void stateChanged();

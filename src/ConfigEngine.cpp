@@ -76,6 +76,7 @@ void ConfigEngine::clear()
     resetContextProperty();
     emit configChanged();
     setConfigLoadedFlag(Global, false);
+    setConfigLoadedFlag(ThemeOverlay, false);
     setConfigLoadedFlag(User, false);
     setConfigLoadedFlag(Project, false);
 }
@@ -162,6 +163,9 @@ void ConfigEngine::setModifiedFlag(ConfigLevel level, bool on)
         case ConfigEngine::Global:
             emit globalConfigModifiedChanged();
             break;
+        case ConfigEngine::ThemeOverlay:
+            emit themeOverlayConfigModifiedChanged();
+            break;
         case ConfigEngine::User:
             emit userConfigModifiedChanged();
             break;
@@ -215,6 +219,11 @@ Node *ConfigEngine::getNodeHelper(const QString &key, int &indexOfProperty)
 bool ConfigEngine::globalConfigModified() const
 {
     return m_state & (GlobalConfigModified << Global);
+}
+
+bool ConfigEngine::themeOverlayConfigModified() const
+{
+    return m_state & (GlobalConfigModified << ThemeOverlay);
 }
 
 bool ConfigEngine::userConfigModified() const
